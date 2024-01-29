@@ -1,0 +1,43 @@
+.nav {
+  grid-area: n;
+  background-color: rgb(238, 245, 174);
+  padding: 10px;
+}
+
+.item {
+  color: rgb(36, 5, 121);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.active {
+  color: goldenrod;
+}
+
+.item a {
+  text-decoration: none;
+}
+
+.item {
+  margin-bottom: 5px;
+}
+
+.item :hover {
+  color: rgb(101, 47, 248);
+}
+
+.friendsWrapper {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.friendsWrapper h3 {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  color: goldenrod;
+}
+
+.friendsElement {
+  display: flex;
+}

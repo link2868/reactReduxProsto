@@ -1,0 +1,29 @@
+.dialog {
+  cursor: pointer;
+  display: flex;
+}
+
+.dialog img {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  margin-right: 5px;
+}
+
+.dialog a {
+  text-decoration: none;
+  color: rgb(36, 5, 121);
+}
+
+.dialog .active {
+  color: goldenrod;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+}
+
+.dialog :hover {
+  color: rgb(101, 47, 248);
+}

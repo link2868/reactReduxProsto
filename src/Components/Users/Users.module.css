@@ -1,0 +1,97 @@
+.userWrapper {
+  margin: 10px;
+}
+.userWrapper h3 {
+  color: rgb(36, 5, 121);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+
+.avatar img {
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.photos {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar button {
+  width: 50%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 2px solid rgb(249, 249, 252);
+  cursor: pointer;
+}
+
+.fullowUnFullow {
+  display: flex;
+  justify-content: center;
+}
+
+.informationStatusCuntainer {
+  width: 30vw;
+  border: 2px solid rgb(249, 249, 252);
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.information {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px 5px 5px;
+}
+.name {
+  font-size: large;
+  font-weight: 500;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+.country {
+  font-size: small;
+  font-weight: 500;
+}
+
+.status {
+  padding: 5px 10px 5px 5px;
+  font-style: italic;
+}
+
+.pagination {
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  color: rgb(115, 113, 156);
+  max-width: 50vw;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+
+.pagination :hover {
+  color: rgb(101, 47, 248);
+}
+
+.paginationNumber {
+  margin-right: 10px;
+}
+
+.active {
+  color: rgb(249, 249, 252);
+}
