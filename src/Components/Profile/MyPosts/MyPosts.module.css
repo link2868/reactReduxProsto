@@ -1,0 +1,12 @@
+.myPostBlock {
+  padding: 10px;
+}
+
+.myPostBlock button {
+  cursor: pointer;
+}
+
+.post {
+  margin-top: 10px;
+  margin-left: 10px;
+}

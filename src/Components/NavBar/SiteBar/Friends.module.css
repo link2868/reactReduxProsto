@@ -1,0 +1,9 @@
+.friendsWrapper {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.friendName {
+  color: rgb(36, 5, 121);
+}
