@@ -1,14 +1,16 @@
 const ADD_POST = "ADD-PROFILE-POST";
 const UPDATE_POST = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 const initialState = {
   posts: [
     { id: 1, message: "Я вивчаю React", likesCount: 5 },
     { id: 2, message: "Сподіваюся, що все вийде", likesCount: 3 },
-    { id: 3, message: " Як у Вас? ", likesCount: 0 },
+    { id: 3, message: " Як справи? ", likesCount: 0 },
     { id: 4, message: " Що нового?", likesCount: 0 },
   ],
   newPostText: "",
+  profile: null,
 };
 
 const profilePostsReducer = (state = initialState, action) => {
@@ -31,6 +33,12 @@ const profilePostsReducer = (state = initialState, action) => {
         newPostText: action.newText,
       };
     }
+    case SET_USER_PROFILE: {
+      return {
+        ...state,
+        profile: action.profile,
+      };
+    }
     default: {
       return state;
     }
@@ -43,6 +51,10 @@ export const addProfilePostActionCreator = () => {
 
 export const updateNewPostTextActionCreator = (text) => {
   return { type: UPDATE_POST, newText: text };
+};
+
+export const setUserProfile = (profile) => {
+  return { type: SET_USER_PROFILE, profile };
 };
 
 export default profilePostsReducer;

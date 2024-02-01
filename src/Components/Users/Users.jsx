@@ -6,6 +6,7 @@ import url from "../../img/avatar/smile.png";
 import style from "./Users.module.css";
 
 const Users = (props) => {
+  
   const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
   const pages = [];

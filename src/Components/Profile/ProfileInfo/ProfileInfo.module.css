@@ -5,3 +5,21 @@ img {
 .descriptionBlock {
   padding: 10px;
 }
+
+.photos {
+  width: 200px;
+}
+.contacts .contactsTitle {
+  font-weight: bold;
+  font-size: small;
+}
+
+.contacts a {
+  font-style: italic;
+  text-decoration: none;
+  color: rgb(36, 5, 121);
+}
+
+.contacts a:hover {
+  color: rgb(101, 47, 248);
+}
