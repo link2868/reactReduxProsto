@@ -24,7 +24,6 @@ const withRouter = (WrappedComponent) => {
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    console.log(this.props);
     let userId = this.props.params.userId;
     if (!userId) {
       userId = 2;

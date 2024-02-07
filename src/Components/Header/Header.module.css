@@ -3,9 +3,46 @@
   background-color: rgb(179, 226, 179);
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .header img {
   width: 12%;
   margin: 4px;
+}
+
+.authContainer {
+  display: flex;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.login {
+  color: azure;
+  font-size: medium;
+  font-weight: 500;
+  margin-right: 24px;
+}
+
+.photoUser {
+  display: flex;
+  justify-content: center;
+}
+
+.photoUser img {
+  width: 40px;
+  border-radius: 12px;
+  border: 2px solid rgb(3, 124, 9);
+  border-style: inset;
+}
+
+.loginUser {
+  color: rgb(3, 124, 9);
+  font-size: medium;
+  font-weight: 500;
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
 }

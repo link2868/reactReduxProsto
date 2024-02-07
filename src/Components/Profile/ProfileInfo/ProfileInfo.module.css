@@ -8,6 +8,9 @@ img {
 
 .photos {
   width: 200px;
+  border-radius: 12px;
+  border: 5px solid rgb(138, 176, 250);
+  border-style: inset;
 }
 .contacts .contactsTitle {
   font-weight: bold;
