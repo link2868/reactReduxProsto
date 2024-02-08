@@ -8,35 +8,39 @@ import {
   setUsers,
   setPage,
   setTotalUsersCount,
-  setPreloader
+  setPreloader,
 } from "../../redux/usersReducer";
 
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+// import { getUsers }  from "../../api/api";
 
 class UsersContainerAxios extends React.Component {
-    componentDidMount() {
-        this.props.setPreloader(true);
+  componentDidMount() {
+    this.props.setPreloader(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+        { withCredentials: true }
       )
-        .then((response) => {
-          this.props.setPreloader(false);
+    // getUsers(this.props.currentPage, this.props.pageSize)
+      .then((response) => {
+        this.props.setPreloader(false);
         this.props.setUsers(response.data.items);
         this.props.setTotalUsersCount(response.data.totalCount);
       });
   }
 
-    setCurrentPage = (page) => {
-      this.props.setPreloader(true);
+  setCurrentPage = (page) => {
+    this.props.setPreloader(true);
     this.props.setPage(page);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
+        { withCredentials: true }
       )
-        .then((response) => {
-          this.props.setPreloader(false);
+      .then((response) => {
+        this.props.setPreloader(false);
         this.props.setUsers(response.data.items);
       });
   };
@@ -86,15 +90,19 @@ const mapStateToProps = (state) => {
 //     setTotalUsersCount: (totalCount) => {
 //       dispatch(setTotalCountActionCreator(totalCount));
 //       },
-//       setPreloader: (isPreloader) => { 
+//       setPreloader: (isPreloader) => {
 //           dispatch(setPreloaderActionCreator(isPreloader))
 //       }
 //   };
 // };
 
-const usersContainer = connect(
-  mapStateToProps,
-  {follow, unFollow, setUsers, setPage, setTotalUsersCount, setPreloader} 
-)(UsersContainerAxios);
+const usersContainer = connect(mapStateToProps, {
+  follow,
+  unFollow,
+  setUsers,
+  setPage,
+  setTotalUsersCount,
+  setPreloader,
+})(UsersContainerAxios);
 
 export default usersContainer;
