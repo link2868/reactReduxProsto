@@ -1,11 +1,11 @@
 import React from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Profile from "./Profile";
 import { setUserProfile } from "../../redux/profilePostsReducer";
 // import Preloader from "../Common/Preloader/Preloader";
+import { api } from "../../api/api";
 
 import style from "./Profile.module.css";
 
@@ -29,11 +29,12 @@ class ProfileContainer extends React.Component {
       userId = 2;
     }
     // this.props.setPreloader(true);
-    axios
-      .get("https://social-network.samuraijs.com/api/1.0/profile/" + userId)
-      .then((response) => {
+    // axios
+    //   .get("https://social-network.samuraijs.com/api/1.0/profile/" + userId)
+    api.getProfile(userId)
+      .then((data) => {
         // this.props.setPreloader(false);
-        this.props.setUserProfile(response.data);
+        this.props.setUserProfile(data);
       });
   }
 

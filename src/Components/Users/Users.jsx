@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 
+import { api } from "../../api/api";
 import url from "../../img/avatar/smile.png";
 
 import style from "./Users.module.css";
@@ -33,18 +33,19 @@ const Users = (props) => {
               {user.followed ? (
                 <button
                   onClick={() => {
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {
-                          withCredentials: true,
-                          header: {
-                            "API-KEY": "42daf599-7cd2-481e-a6fc-637aedcf77f8",
-                          },
-                        },
-                      )
-                      .then((response) => {
-                        if (response.data.resultCode === 0) {
+                    // axios
+                    //   .delete(
+                    //     `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                    //     {
+                    //       withCredentials: true,
+                    //       header: {
+                    //         "API-KEY": "42daf599-7cd2-481e-a6fc-637aedcf77f8",
+                    //       },
+                    //     },
+                //   )
+                    api.deleteFollow(user.id)
+                      .then((data) => {
+                        if (data.resultCode === 0) {
                           props.unFollow(user.id);
                         }
                       });
@@ -55,19 +56,20 @@ const Users = (props) => {
               ) : (
                 <button
                   onClick={() => {
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                          header: {
-                            key: "42daf599-7cd2-481e-a6fc-637aedcf77f8",
-                          },
-                        },
-                      )
-                      .then((response) => {
-                        if (response.data.resultCode === 0) {
+                    // axios
+                    //   .post(
+                    //     `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                    //     {},
+                    //     {
+                    //       withCredentials: true,
+                    //       header: {
+                    //         key: "42daf599-7cd2-481e-a6fc-637aedcf77f8",
+                    //       },
+                    //     },
+                  //   )
+                      api.postFollow(user.id)
+                      .then((data) => {
+                        if (data.resultCode === 0) {
                           props.follow(user.id);
                         }
                       });
