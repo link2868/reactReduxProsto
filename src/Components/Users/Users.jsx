@@ -7,6 +7,7 @@ import url from "../../img/avatar/smile.png";
 import style from "./Users.module.css";
 
 const Users = (props) => {
+  
   const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
   const pages = [];
@@ -32,6 +33,7 @@ const Users = (props) => {
             <div className={style.fullowUnFullow}>
               {user.followed ? (
                 <button
+                  disabled={props.isEnabled.some(id => (id === user.id))}
                   onClick={() => {
                     // axios
                     //   .delete(
@@ -42,19 +44,22 @@ const Users = (props) => {
                     //         "API-KEY": "42daf599-7cd2-481e-a6fc-637aedcf77f8",
                     //       },
                     //     },
-                //   )
+                    //   )
+                    props.setEnable(true, user.id)
                     api.deleteFollow(user.id)
                       .then((data) => {
                         if (data.resultCode === 0) {
                           props.unFollow(user.id);
                         }
+                        props.setEnable(false, user.id)
                       });
                   }}
                 >
                   UnFollow
                 </button>
               ) : (
-                <button
+                  <button
+                  disabled={ props.isEnabled.some(id => (id===user.id))}
                   onClick={() => {
                     // axios
                     //   .post(
@@ -66,12 +71,14 @@ const Users = (props) => {
                     //         key: "42daf599-7cd2-481e-a6fc-637aedcf77f8",
                     //       },
                     //     },
-                  //   )
+                    //   )
+                    props.setEnable(true, user.id)
                       api.postFollow(user.id)
                       .then((data) => {
                         if (data.resultCode === 0) {
                           props.follow(user.id);
                         }
+                        props.setEnable(false, user.id)
                       });
                   }}
                 >

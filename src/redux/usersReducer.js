@@ -4,6 +4,8 @@ const SETUSERS = "SETUSERS";
 const SETPAGE = "SETPAGE";
 const SETTOTALCOUNT = "SETTOTSLCOUNT";
 const IS_PRELOADER = "IS_PRELOADER";
+const IS_ENABLED = "IS_ENABLED";
+
 // const initialState = {
 //   users: [
 //     {
@@ -47,6 +49,7 @@ const initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isPreloader: false,
+  isEnabled: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -97,6 +100,16 @@ const usersReducer = (state = initialState, action) => {
         isPreloader: action.isPreloader,
       };
     }
+    case IS_ENABLED: {
+      return {
+        ...state,
+        isEnabled: action.enable
+          ? [...state.isEnabled, action.id]
+          : state.isEnabled.filter((id) => {
+              return id !== action.id;
+            }),
+      };
+    }
     default: {
       return state;
     }
@@ -125,6 +138,10 @@ export const setTotalUsersCount = (totalCount) => {
 
 export const setPreloader = (isPreloader) => {
   return { type: IS_PRELOADER, isPreloader };
+};
+
+export const setEnable = (enable, id) => {
+  return { type: IS_ENABLED, enable, id };
 };
 
 export default usersReducer;

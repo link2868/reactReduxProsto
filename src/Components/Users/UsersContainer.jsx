@@ -8,6 +8,7 @@ import {
   setPage,
   setTotalUsersCount,
   setPreloader,
+  setEnable
 } from "../../redux/usersReducer";
 
 import Users from "./Users";
@@ -50,6 +51,8 @@ class UsersContainerAxios extends React.Component {
           unFollow={this.props.unFollow}
           currentPage={this.props.currentPage}
           setCurrentPage={this.setCurrentPage}
+          setEnable={this.props.setEnable}
+          isEnabled={ this.props.isEnabled}
         />
       </>
     );
@@ -63,6 +66,7 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isPreloader: state.usersPage.isPreloader,
+    isEnabled: state.usersPage.isEnabled,
   };
 };
 
@@ -96,6 +100,7 @@ const usersContainer = connect(mapStateToProps, {
   setPage,
   setTotalUsersCount,
   setPreloader,
+  setEnable,
 })(UsersContainerAxios);
 
 export default usersContainer;
