@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { api } from "../../api/api";
 import url from "../../img/avatar/smile.png";
 
 import style from "./Users.module.css";
@@ -35,24 +34,15 @@ const Users = (props) => {
                 <button
                   disabled={props.isEnabled.some(id => (id === user.id))}
                   onClick={() => {
-                    // axios
-                    //   .delete(
-                    //     `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                    //     {
-                    //       withCredentials: true,
-                    //       header: {
-                    //         "API-KEY": "42daf599-7cd2-481e-a6fc-637aedcf77f8",
-                    //       },
-                    //     },
-                    //   )
-                    props.setEnable(true, user.id)
-                    api.deleteFollow(user.id)
-                      .then((data) => {
-                        if (data.resultCode === 0) {
-                          props.unFollow(user.id);
-                        }
-                        props.setEnable(false, user.id)
-                      });
+                    props.unFollowThunkCreator(user.id);
+                    // props.setEnable(true, user.id)
+                    // api.deleteFollow(user.id)
+                    //   .then((data) => {
+                    //     if (data.resultCode === 0) {
+                    //       props.unFollow(user.id);
+                    //     }
+                    //     props.setEnable(false, user.id)
+                    //   });
                   }}
                 >
                   UnFollow
@@ -61,25 +51,15 @@ const Users = (props) => {
                   <button
                   disabled={ props.isEnabled.some(id => (id===user.id))}
                   onClick={() => {
-                    // axios
-                    //   .post(
-                    //     `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                    //     {},
-                    //     {
-                    //       withCredentials: true,
-                    //       header: {
-                    //         key: "42daf599-7cd2-481e-a6fc-637aedcf77f8",
-                    //       },
-                    //     },
-                    //   )
-                    props.setEnable(true, user.id)
-                      api.postFollow(user.id)
-                      .then((data) => {
-                        if (data.resultCode === 0) {
-                          props.follow(user.id);
-                        }
-                        props.setEnable(false, user.id)
-                      });
+                    props.followThunkCreator(user.id)
+                    // props.setEnable(true, user.id)
+                    //   api.postFollow(user.id)
+                    //   .then((data) => {
+                    //     if (data.resultCode === 0) {
+                    //       props.follow(user.id);
+                    //     }
+                    //     props.setEnable(false, user.id)
+                    //     });
                   }}
                 >
                   Follow

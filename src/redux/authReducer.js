@@ -1,3 +1,5 @@
+import { api } from "../api/api";
+
 const SET_AUTH_USER = "SET_AUTH_USER";
 const SET_PHOTO_USER = "SET_PHOTO_USER";
 
@@ -42,5 +44,25 @@ export const setAuthUser = (id, login, email) => {
 // export const setAuthUser = (data) => {
 //   return { type: SET_AUTH_USER, data: data };
 // };
+
+export const getAuthThunkCreator = () => {
+  return (dispatch) => {
+    api
+      .getAuth()
+      .then((data) => {
+        if (data.resultCode === 0) {
+          const { id, login, email } = data.data;
+          dispatch(setAuthUser(id, login, email));
+          // this.props.setAuthUser(response.data.data);
+          return id;
+        }
+      })
+      .then((id) => {
+        api.getProfile(id).then((data) => {
+          dispatch(setPhotoUser(data.photos.small));
+        });
+      });
+  };
+};
 
 export default authUserReducer;

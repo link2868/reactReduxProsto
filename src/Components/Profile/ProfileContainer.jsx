@@ -3,10 +3,8 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Profile from "./Profile";
-import { setUserProfile } from "../../redux/profilePostsReducer";
+import { setUserProfileThunkCreator } from "../../redux/profilePostsReducer";
 // import Preloader from "../Common/Preloader/Preloader";
-import { api } from "../../api/api";
-
 import style from "./Profile.module.css";
 
 const withRouter = (WrappedComponent) => {
@@ -28,14 +26,12 @@ class ProfileContainer extends React.Component {
     if (!userId) {
       userId = 2;
     }
-    // this.props.setPreloader(true);
-    // axios
-    //   .get("https://social-network.samuraijs.com/api/1.0/profile/" + userId)
-    api.getProfile(userId)
-      .then((data) => {
-        // this.props.setPreloader(false);
-        this.props.setUserProfile(data);
-      });
+    this.props.setUserProfileThunkCreator(userId);
+    // api.getProfile(userId)
+    //   .then((data) => {
+    //     // this.props.setPreloader(false);
+    //     this.props.setUserProfile(data);
+    //   });
   }
 
   render() {
@@ -61,6 +57,6 @@ const mapStateToProps = (state) => {
 // )(ProfileContainerAxios);
 // const ProfileContainerUrl = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, { setUserProfile })(
+export default connect(mapStateToProps, { setUserProfileThunkCreator })(
   ProfileContainerUrl
 );
