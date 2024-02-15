@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 import Profile from "./Profile";
 import { setUserProfileThunkCreator } from "../../redux/profilePostsReducer";
@@ -8,6 +8,7 @@ import { setUserProfileThunkCreator } from "../../redux/profilePostsReducer";
 import style from "./Profile.module.css";
 
 const withRouter = (WrappedComponent) => {
+  
   return (props) => {
     const params = useParams();
     return <WrappedComponent {...props} params={params} />;
@@ -35,9 +36,14 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
+
+    if (!this.props.resultAuth) { 
+      return <Navigate to={"/login"}/>
+    }
+
     return (
       <div className={style.profile}>
-        <Profile {...this.props} profile={this.props.profile} />
+        <Profile {...this.props} profile={this.props.profile}/>
       </div>
     );
   }
@@ -48,6 +54,7 @@ const ProfileContainerUrl = withRouter(ProfileContainer);
 const mapStateToProps = (state) => {
   return {
     profile: state.profilePostsPage.profile,
+    resultAuth: state.authUser.resultAuth
   };
 };
 
