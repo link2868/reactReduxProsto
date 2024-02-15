@@ -31,6 +31,7 @@ import Dialogs from "./Dialogs";
 const mapStateToProps = (state) => {
   return {
     dialogsMessagesPage: state.dialogsMessagesPage,
+    resultAuth: state.authUser.resultAuth,
   };
 };
 

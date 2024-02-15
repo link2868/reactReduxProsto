@@ -28,7 +28,7 @@ const MyPosts = (props) => {
     props.updateNewPostText(text);
     // const action = {type: "UPDATE-NEW-POST-TEXT", newText: text }
   };
-
+  
   return (
     <div className={style.myPostBlock}>
       <h3>My posts</h3>
