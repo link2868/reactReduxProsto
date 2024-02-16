@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Profile from "./Profile";
 import { setUserProfileThunkCreator } from "../../redux/profilePostsReducer";
+import { withAuthNavigate } from "../../hoc/withAuthNavigate";
+
 // import Preloader from "../Common/Preloader/Preloader";
 import style from "./Profile.module.css";
 
@@ -36,11 +38,6 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-
-    if (!this.props.resultAuth) { 
-      return <Navigate to={"/login"}/>
-    }
-
     return (
       <div className={style.profile}>
         <Profile {...this.props} profile={this.props.profile}/>
@@ -49,7 +46,9 @@ class ProfileContainer extends React.Component {
   }
 }
 
-const ProfileContainerUrl = withRouter(ProfileContainer);
+const AuthNavigate = withAuthNavigate(ProfileContainer); 
+
+const ProfileContainerUrl = withRouter(AuthNavigate);
 
 const mapStateToProps = (state) => {
   return {

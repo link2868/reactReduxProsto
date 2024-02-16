@@ -5,6 +5,7 @@ import {
   addMessagesMessageActionCreator,
   updateMessageTextActionCreator,
 } from "../../redux/dialogsMessagesReducer";
+import { withAuthNavigate } from "../../hoc/withAuthNavigate";
 import Dialogs from "./Dialogs";
 
 // const DialogsContainer = (props) => {
@@ -27,6 +28,7 @@ import Dialogs from "./Dialogs";
 //     />
 //   );
 // };
+const AuthNavigate = withAuthNavigate(Dialogs)
 
 const mapStateToProps = (state) => {
   return {
@@ -46,6 +48,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthNavigate);
 
 export default DialogsContainer;
