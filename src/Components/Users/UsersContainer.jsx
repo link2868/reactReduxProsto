@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 
 import {
-  // follow,
-  // unFollow,
   setPage,
   setEnable,
   getUsersThunkCreator,
@@ -15,30 +14,15 @@ import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
 
 
-class UsersContainerAxios extends React.Component {
+class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
-
-    // this.props.setPreloader(true);
-    // api.getUsers(this.props.currentPage, this.props.pageSize)
-    //   .then((data) => {
-    //     this.props.setPreloader(false);
-    //     this.props.setUsers(data.items);
-    //     this.props.setTotalUsersCount(data.totalCount);
-    //   });
   }
   
 
   setCurrentPage = (page) => {
     this.props.getUsers(page, this.props.pageSize);
     this.props.setPage(page);
-    
-    // this.props.setPreloader(true);
-    // api.getUsers(page, this.props.pageSize)
-    //   .then((data) => {
-    //     this.props.setPreloader(false);
-    //     this.props.setUsers(data.items);
-    //   });
   };
 
   render() {
@@ -63,8 +47,6 @@ class UsersContainerAxios extends React.Component {
   }
 }
 
-const AuthNavigate = withAuthNavigate(UsersContainerAxios);
-
 const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -77,14 +59,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-const usersContainer = connect(mapStateToProps, {
-  // follow,
-  // unFollow,
+export default compose(
+  connect(mapStateToProps, {
   setPage,
   setEnable,
   getUsers: getUsersThunkCreator,
   followThunkCreator,
   unFollowThunkCreator
-})(AuthNavigate);
-
-export default usersContainer;
+}),
+  withAuthNavigate
+)(UsersContainer);

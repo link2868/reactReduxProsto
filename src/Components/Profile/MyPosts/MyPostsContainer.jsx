@@ -31,7 +31,8 @@ const mapStateToProps = (state) => {
   return ({
     posts: state.profilePostsPage.posts,
     newPostText: state.profilePostsPage.newPostText,
-    // profilePostsPage: state.profilePostsPage
+    // profilePostsPage: state.profilePostsPage,
+    resultAuth: state.authUser.resultAuth
   })
 }
 

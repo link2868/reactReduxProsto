@@ -8,23 +8,6 @@ import Header from "./Header";
 class HeaderContainer extends React.Component {
   componentDidMount() {
     this.props.getAuthThunkCreator()
-
-    // api.getAuth()
-    //     .then((data) => {
-    //           if (data.resultCode === 0) {
-    //               const { id, login, email } = data.data;
-    //               this.props.setAuthUser(id, login, email);
-    //               // this.props.setAuthUser(response.data.data);
-    //             return(id)
-    //           }
-    //       })
-    //     .then((id) => {
-        
-    //     api.getProfile(id)
-    //       .then((data) => {
-    //         this.props.setPhotoUser(data.photos.small);
-    //       });
-    //   });
   }
   render() {
     return <Header {...this.props} />;

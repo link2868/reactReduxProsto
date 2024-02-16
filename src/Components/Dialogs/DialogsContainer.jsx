@@ -1,5 +1,6 @@
 // import React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 
 import {
   addMessagesMessageActionCreator,
@@ -7,28 +8,6 @@ import {
 } from "../../redux/dialogsMessagesReducer";
 import { withAuthNavigate } from "../../hoc/withAuthNavigate";
 import Dialogs from "./Dialogs";
-
-// const DialogsContainer = (props) => {
-//   const state = props.store.getState().dialogsMessagesPage;
-
-//   const addNewMessage = () => {
-//     // props.addMessagesMessage();
-//     props.store.dispatch(addMessagesMessageActionCreator());
-//   };
-
-//   const onMessageChange = (text) => {
-//     props.store.dispatch(updateMessageTextActionCreator(text));
-//   };
-
-//   return (
-//     <Dialogs
-//       dialogsMessagesPage={ state}
-//       addMessagesMessage = {addNewMessage}
-//       updateMessageText = {onMessageChange}
-//     />
-//   );
-// };
-const AuthNavigate = withAuthNavigate(Dialogs)
 
 const mapStateToProps = (state) => {
   return {
@@ -48,6 +27,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthNavigate);
+const DialogsContainer = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthNavigate
+)(Dialogs);
 
 export default DialogsContainer;
