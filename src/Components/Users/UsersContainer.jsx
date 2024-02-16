@@ -10,9 +10,10 @@ import {
   followThunkCreator,
   unFollowThunkCreator
 } from "../../redux/usersReducer";
-
+import { withAuthNavigate } from "../../hoc/withAuthNavigate";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+
 
 class UsersContainerAxios extends React.Component {
   componentDidMount() {
@@ -62,6 +63,8 @@ class UsersContainerAxios extends React.Component {
   }
 }
 
+const AuthNavigate = withAuthNavigate(UsersContainerAxios);
+
 const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -70,6 +73,7 @@ const mapStateToProps = (state) => {
     currentPage: state.usersPage.currentPage,
     isPreloader: state.usersPage.isPreloader,
     isEnabled: state.usersPage.isEnabled,
+    resultAuth: state.authUser.resultAuth,
   };
 };
 
@@ -81,6 +85,6 @@ const usersContainer = connect(mapStateToProps, {
   getUsers: getUsersThunkCreator,
   followThunkCreator,
   unFollowThunkCreator
-})(UsersContainerAxios);
+})(AuthNavigate);
 
 export default usersContainer;
