@@ -1,6 +1,7 @@
 import React from "react";
 
 import Preloader from "../../Common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 import photoProfile from "../../../img/profile-photo.jpeg";
 import photoLarge from "../../../img/avatar/user.png";
@@ -16,6 +17,7 @@ const ProfileInfo = (props) => {
       <div>
         <img src={photoProfile} alt="" />
       </div>
+      <ProfileStatus status={ "I'm looking for a job" } />
       <div className={style.descriptionBlock}>
         <h3>{props.profile.aboutMe}</h3>
         {!props.profile.photos.large ? (
