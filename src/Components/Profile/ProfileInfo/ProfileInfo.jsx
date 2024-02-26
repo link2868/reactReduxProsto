@@ -1,6 +1,7 @@
 import React from "react";
 
 import Preloader from "../../Common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 import photoProfile from "../../../img/profile-photo.jpeg";
 import photoLarge from "../../../img/avatar/user.png";
@@ -11,22 +12,41 @@ const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />;
   }
+
+  const onFotoSelected = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0]);
+    }
+  };
+
   return (
     <div>
       <div>
         <img src={photoProfile} alt="" />
       </div>
+      <ProfileStatus
+        status={props.status}
+        updateUserStatus={props.updateUserStatus}
+      />
       <div className={style.descriptionBlock}>
         <h3>{props.profile.aboutMe}</h3>
-        {!props.profile.photos.large ? (
-          <img className={style.photos} src={photoLarge} alt="" />
-        ) : (
-          <img
-            className={style.photos}
-            src={props.profile.photos.large}
-            alt=""
-          />
-        )}
+        <div className={style.photosDownloads}>
+          <div className={style.photosDownloadsImg}>
+            <img
+              className={style.photos}
+              src={props.profile.photos.large || photoLarge}
+              alt=""
+            />
+          </div>
+          <div className={style.photosDownloadsInput}>
+            {props.isOwner && (
+              <input
+                type="file"
+                onChange={onFotoSelected}
+              />
+            )}
+          </div>
+        </div>
         <div>
           {props.profile.lookingForAJob ? (
             props.profile.lookingForAJobDescription
@@ -34,7 +54,7 @@ const ProfileInfo = (props) => {
             <span>Не шукаю роботу</span>
           )}
         </div>
-        <div  className={style.contacts}>
+        <div className={style.contacts}>
           <h4>Мої контакти:</h4>
           <div>
             <span className={style.contactsTitle}>facebook:</span>{" "}
@@ -45,7 +65,7 @@ const ProfileInfo = (props) => {
             >
               {props.profile.contacts.facebook}
             </a>
-            </div>
+          </div>
           <div>
             <span className={style.contactsTitle}>website:</span>{" "}
             <a
@@ -55,15 +75,17 @@ const ProfileInfo = (props) => {
             >
               {props.profile.contacts.website}
             </a>
-            </div>
+          </div>
           <div>
             <span className={style.contactsTitle}>instagram:</span>{" "}
-             <a
+            <a
               href={`https://${props.profile.contacts.instagram}`}
               target="_blank"
               rel="noopener noreferrer"
-            >{props.profile.contacts.instagram}</a>
-            </div>
+            >
+              {props.profile.contacts.instagram}
+            </a>
+          </div>
           <div>
             <span className={style.contactsTitle}>github:</span>{" "}
             <a
@@ -79,6 +101,5 @@ const ProfileInfo = (props) => {
     </div>
   );
 };
-
 
 export default ProfileInfo;

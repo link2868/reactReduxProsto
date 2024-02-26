@@ -1,4 +1,4 @@
-import { api } from "../api/api";
+import { usersApi } from "../api/api";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -150,7 +150,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
   return (dispatch) => {
     dispatch(setPreloader(true));
 
-    api.getUsers(currentPage, pageSize).then((data) => {
+    usersApi.getUsers(currentPage, pageSize).then((data) => {
       dispatch(setPreloader(false));
       dispatch(setUsers(data.items));
       dispatch(setTotalUsersCount(data.totalCount));
@@ -162,7 +162,7 @@ export const followThunkCreator = (userId) => {
   return (dispatch) => {
     dispatch(setEnable(true, userId));
     dispatch(setPreloader(true));
-    api.postFollow(userId).then((data) => {
+    usersApi.postFollow(userId).then((data) => {
       dispatch(setPreloader(false));
       if (data.resultCode === 0) {
         dispatch(follow(userId));
@@ -176,7 +176,7 @@ export const unFollowThunkCreator = (userId) => {
   return (dispatch) => {
     dispatch(setEnable(true, userId));
     dispatch(setPreloader(true));
-    api.deleteFollow(userId).then((data) => {
+    usersApi.deleteFollow(userId).then((data) => {
       dispatch(setPreloader(false));
       if (data.resultCode === 0) {
         dispatch(unFollow(userId));

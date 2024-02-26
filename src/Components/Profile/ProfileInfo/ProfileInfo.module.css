@@ -26,3 +26,21 @@ img {
 .contacts a:hover {
   color: rgb(101, 47, 248);
 }
+
+.photosDownloads {
+  display: flex;
+  position: relative;
+}
+
+.photosDownloads .photosDownloadsInput {
+  display: flex;
+  position: absolute;
+}
+
+.photosDownloadsInput input {
+  display: flex;
+  height: 200px;
+  width: 200px;
+  cursor: pointer;
+  opacity: 0;
+}
