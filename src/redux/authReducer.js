@@ -1,4 +1,4 @@
-import { api } from "../api/api";
+import { profileApi, authApi } from "../api/api";
 
 const SET_AUTH_USER = "SET_AUTH_USER";
 const SET_PHOTO_USER = "SET_PHOTO_USER";
@@ -47,7 +47,7 @@ export const setAuthUser = (id, login, email) => {
 
 export const getAuthThunkCreator = () => {
   return (dispatch) => {
-    api
+    authApi
       .getAuth()
       .then((data) => {
         if (data.resultCode === 0) {
@@ -58,7 +58,7 @@ export const getAuthThunkCreator = () => {
         }
       })
       .then((id) => {
-        api.getProfile(id).then((data) => {
+        profileApi.getProfile(id).then((data) => {
           dispatch(setPhotoUser(data.photos.small));
         });
       });

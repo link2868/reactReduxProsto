@@ -1,8 +1,10 @@
-import { api } from "../api/api";
+import { profileApi } from "../api/api";
 
 const ADD_POST = "ADD-PROFILE-POST";
 const UPDATE_POST = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
+const SET_PHOTO = "SET_PHOTO";
 
 const initialState = {
   posts: [
@@ -13,6 +15,7 @@ const initialState = {
   ],
   newPostText: "",
   profile: null,
+  status: "",
 };
 
 const profilePostsReducer = (state = initialState, action) => {
@@ -41,6 +44,18 @@ const profilePostsReducer = (state = initialState, action) => {
         profile: action.profile,
       };
     }
+    case SET_STATUS: {
+      return {
+        ...state,
+        status: action.status,
+      };
+    }
+    case SET_PHOTO: {
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos },
+      };
+    }
     default: {
       return state;
     }
@@ -59,10 +74,52 @@ export const setUserProfile = (profile) => {
   return { type: SET_USER_PROFILE, profile };
 };
 
+export const setUserStatus = (status) => {
+  return {
+    type: SET_STATUS,
+    status,
+  };
+};
+
+export const setUpdatePhoto = (photos) => {
+  return {
+    type: SET_PHOTO,
+    photos,
+  };
+};
+
 export const setUserProfileThunkCreator = (userId) => {
   return (dispatch) => {
-    api.getProfile(userId).then((data) => {
+    profileApi.getProfile(userId).then((data) => {
       dispatch(setUserProfile(data));
+    });
+  };
+};
+
+export const getUserStatus = (userId) => {
+  return (dispatch) => {
+    profileApi.getProfileStatus(userId).then((status) => {
+      dispatch(setUserStatus(status));
+    });
+  };
+};
+
+export const updateUserStatus = (status) => {
+  return (dispatch) => {
+    profileApi.putUpdateProfileStatus(status).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setUserStatus(status));
+      }
+    });
+  };
+};
+
+export const savePhoto = (file) => {
+  return (dispatch) => {
+    profileApi.putUpdatePhoto(file).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setUpdatePhoto(data.data.photos));
+      }
     });
   };
 };
