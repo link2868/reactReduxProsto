@@ -27,6 +27,7 @@ const ProfileInfo = (props) => {
       <ProfileStatus
         status={props.status}
         updateUserStatus={props.updateUserStatus}
+        isOwner={props.isOwner}
       />
       <div className={style.descriptionBlock}>
         <h3>{props.profile.aboutMe}</h3>

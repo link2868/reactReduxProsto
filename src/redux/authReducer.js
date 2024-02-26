@@ -17,7 +17,6 @@ const authUserReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        resultAuth: true,
         photos: action.photos,
       };
     }
@@ -37,8 +36,8 @@ export const setPhotoUser = (photos) => {
   return { type: SET_PHOTO_USER, photos };
 };
 
-export const setAuthUser = (id, login, email) => {
-  return { type: SET_AUTH_USER, data: { id, login, email } };
+export const setAuthUser = (id, login, email, resultAuth) => {
+  return { type: SET_AUTH_USER, data: { id, login, email, resultAuth } };
 };
 
 // export const setAuthUser = (data) => {
@@ -52,7 +51,7 @@ export const getAuthThunkCreator = () => {
       .then((data) => {
         if (data.resultCode === 0) {
           const { id, login, email } = data.data;
-          dispatch(setAuthUser(id, login, email));
+          dispatch(setAuthUser(id, login, email, true));
           // this.props.setAuthUser(response.data.data);
           return id;
         }
@@ -62,6 +61,26 @@ export const getAuthThunkCreator = () => {
           dispatch(setPhotoUser(data.photos.small));
         });
       });
+  };
+};
+
+export const postFormLogin = (email, password, rememberMe) => {
+  return (dispatch) => {
+    authApi.postLogin(email, password, rememberMe).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(getAuthThunkCreator());
+      }
+    });
+  };
+};
+
+export const deleteFormLogout = () => {
+  return (dispatch) => {
+    authApi.deletetLogout().then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setAuthUser(null, null, null, false));
+      }
+    });
   };
 };
 

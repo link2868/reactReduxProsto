@@ -57,8 +57,8 @@ class ProfileContainer extends React.Component {
           profile={this.props.profile}
           status={this.props.status}
           updateUserStatus={this.props.updateUserStatus}
-          isOwner={!this.props.params.userId}
-          savePhoto={ this.props.savePhoto}
+          isOwner={!this.props.params.userId || this.props.params.userId === "30760"}
+          savePhoto={this.props.savePhoto}
         />
       </div>
     );
@@ -79,5 +79,5 @@ export default compose(
     updateUserStatus,
     savePhoto,
   }),
-  withRouter
+  withRouter,
 )(ProfileContainer);

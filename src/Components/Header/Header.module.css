@@ -12,7 +12,24 @@
 }
 
 .authContainer {
+}
+
+.authLogoContainer {
   display: flex;
+}
+
+.authButtonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.authButtonContainer button {
+  border: 2px solid rgb(3, 124, 9);
+  border-radius: 12px;
+}
+
+.authButtonContainer button span {
+  color: rgb(3, 124, 9);
 }
 
 .header a {

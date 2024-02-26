@@ -13,14 +13,19 @@ const Header = (props) => {
       </div>
       {props.resultAuth ? (
         <div className={style.authContainer}>
-          <div className={style.photoUser}>
-            {props.photos === null ? (
-              <img className={style.photoUserNull} src={photos} alt="" />
-            ) : (
-              <img src={props.photos} alt="" />
-            )}
+          <div className={style.authLogoContainer}>
+            <div className={style.photoUser}>
+              {props.photos === null ? (
+                <img className={style.photoUserNull} src={photos} alt="" />
+              ) : (
+                <img src={props.photos} alt="" />
+              )}
+            </div>
+            <div className={style.loginUser}>{props.login}</div>
           </div>
-          <div className={style.loginUser}>{props.login}</div>
+          <div className={style.authButtonContainer}>
+            <button onClick={props.deleteFormLogout}><span>Вийти</span></button>
+          </div>
         </div>
       ) : (
         <NavLink to="/login">

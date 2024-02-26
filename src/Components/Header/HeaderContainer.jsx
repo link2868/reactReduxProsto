@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getAuthThunkCreator } from "../../redux/authReducer";
+import { getAuthThunkCreator, deleteFormLogout } from "../../redux/authReducer";
 
 import Header from "./Header";
 
@@ -22,6 +22,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getAuthThunkCreator })(
+export default connect(mapStateToProps, { getAuthThunkCreator, deleteFormLogout })(
   HeaderContainer
 );
