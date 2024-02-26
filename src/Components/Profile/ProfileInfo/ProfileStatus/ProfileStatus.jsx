@@ -1,5 +1,7 @@
 import React from "react";
 
+import style from "./ProfileStatus.module.css";
+
 class ProfileStatus extends React.Component {
   state = {
     editMode: false,
@@ -19,9 +21,15 @@ class ProfileStatus extends React.Component {
     this.setState({ status: e.currentTarget.value });
   }
 
+  componentDidUpdate(prevProps, prevState) { 
+    if (prevProps.status !== this.props.status) { 
+      this.setState({status: this.props.status})
+    }
+  }
+
   render() {  
     return (
-      <div>
+      <div  className={style.statusBlock}>
         {!this.state.editMode &&
           <div>
             <span onClick={this.activateEditMode}>
