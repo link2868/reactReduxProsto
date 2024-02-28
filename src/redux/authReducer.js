@@ -2,12 +2,14 @@ import { profileApi, authApi } from "../api/api";
 
 const SET_AUTH_USER = "SET_AUTH_USER";
 const SET_PHOTO_USER = "SET_PHOTO_USER";
+const SET_ERROR_MESSAGE_AUTH = "SET_ERROR_MESSAGE_AUTH";
 
 const initialState = {
   id: NaN,
   login: NaN,
   email: NaN,
   resultAuth: false,
+  messageErrorAuth: [],
   photos: NaN,
 };
 
@@ -17,7 +19,6 @@ const authUserReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        resultAuth: true,
         photos: action.photos,
       };
     }
@@ -25,6 +26,12 @@ const authUserReducer = (state = initialState, action) => {
       return {
         ...state,
         photos: action.photos,
+      };
+    }
+    case SET_ERROR_MESSAGE_AUTH: {
+      return {
+        ...state,
+        messageErrorAuth: action.messages,
       };
     }
     default: {
@@ -37,8 +44,12 @@ export const setPhotoUser = (photos) => {
   return { type: SET_PHOTO_USER, photos };
 };
 
-export const setAuthUser = (id, login, email) => {
-  return { type: SET_AUTH_USER, data: { id, login, email } };
+export const setAuthUser = (id, login, email, resultAuth) => {
+  return { type: SET_AUTH_USER, data: { id, login, email, resultAuth } };
+};
+
+export const setErrorMessageAuth = (messages) => {
+  return { type: SET_ERROR_MESSAGE_AUTH, messages };
 };
 
 // export const setAuthUser = (data) => {
@@ -52,7 +63,7 @@ export const getAuthThunkCreator = () => {
       .then((data) => {
         if (data.resultCode === 0) {
           const { id, login, email } = data.data;
-          dispatch(setAuthUser(id, login, email));
+          dispatch(setAuthUser(id, login, email, true));
           // this.props.setAuthUser(response.data.data);
           return id;
         }
@@ -62,6 +73,28 @@ export const getAuthThunkCreator = () => {
           dispatch(setPhotoUser(data.photos.small));
         });
       });
+  };
+};
+
+export const postFormLogin = (email, password, rememberMe) => {
+  return (dispatch) => {
+    authApi.postLogin(email, password, rememberMe).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(getAuthThunkCreator());
+      } else {
+        dispatch(setErrorMessageAuth(data.messages));
+      }
+    });
+  };
+};
+
+export const deleteFormLogout = () => {
+  return (dispatch) => {
+    authApi.deletetLogout().then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setAuthUser(null, null, null, false));
+      }
+    });
   };
 };
 

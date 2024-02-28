@@ -11,12 +11,15 @@ import sitebarReducer from "./sitebarReducer";
 import usersReducer from "./usersReducer";
 import authUserReducer from "./authReducer";
 
+import { reducer as formReducer } from "redux-form";
+
 const reducers = combineReducers({
   profilePostsPage: profilePostsReducer,
   dialogsMessagesPage: dialogsMessagesReducer,
   sitebar: sitebarReducer,
   usersPage: usersReducer,
   authUser: authUserReducer,
+  form: formReducer,
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
