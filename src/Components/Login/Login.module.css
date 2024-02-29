@@ -10,3 +10,18 @@
 .loginBlock h2 {
   color: rgb(36, 5, 121);
 }
+
+.loginBlock .rememberMe {
+  color: rgb(36, 5, 121);
+  font-size: small;
+}
+
+.loginBlock .messageError {
+  color: red;
+  font-size: small;
+  margin-top: 5px;
+}
+
+.loginBlock button {
+  cursor: pointer;
+}

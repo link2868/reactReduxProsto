@@ -5,7 +5,7 @@ import user4 from "../img/avatar/girl-ava01.png";
 import user5 from "../img/avatar/uaBoy.jpg";
 
 const ADD_MESSAGE = "ADD-MESSAGES-MESSAGE";
-const UPDATE_MESSAGE = "UPDATE-MESSAGE-TEXT";
+// const UPDATE_MESSAGE = "UPDATE-MESSAGE-TEXT";
 
 const initialState = {
   dialogs: [
@@ -21,7 +21,7 @@ const initialState = {
     { id: 3, message: "У тебе все вийде!" },
     { id: 4, message: "І я поїду на Мальдіви!" },
   ],
-  newMessageText: "",
+  // newMessageText: "",
 };
 
 const dialogsMessagesReducer = (state = initialState, action) => {
@@ -34,32 +34,32 @@ const dialogsMessagesReducer = (state = initialState, action) => {
     case ADD_MESSAGE: {
       const newMessage = {
         id: 5,
-        message: state.newMessageText,
+        message: action.newMessage,
       };
       return {
         ...state,
         messages: [...state.messages, newMessage],
-        newMessageText: "",
+        // newMessageText: "",
       };
     }
-    case UPDATE_MESSAGE: {
-      return {
-        ...state,
-        newMessageText: action.newText,
-      };
-    }
+    // case UPDATE_MESSAGE: {
+    //   return {
+    //     ...state,
+    //     newMessageText: action.newText,
+    //   };
+    // }
     default: {
       return state;
     }
   }
 };
 
-export const addMessagesMessageActionCreator = () => {
-  return { type: ADD_MESSAGE };
+export const addMessagesMessageActionCreator = (newMessage) => {
+  return { type: ADD_MESSAGE, newMessage };
 };
 
-export const updateMessageTextActionCreator = (text) => {
-  return { type: UPDATE_MESSAGE, newText: text };
-};
+// export const updateMessageTextActionCreator = (text) => {
+//   return { type: UPDATE_MESSAGE, newText: text };
+// };
 
 export default dialogsMessagesReducer;
