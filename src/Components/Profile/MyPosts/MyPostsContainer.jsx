@@ -1,7 +1,8 @@
-import { addProfilePostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profilePostsReducer";
-
-import MyPosts from "./MyPosts";
 import { connect } from "react-redux";
+import { addProfilePostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profilePostsReducer";
+import { withAuthNavigate } from "../../../hoc/withAuthNavigate";
+import MyPosts from "./MyPosts";
+
 
 // const MyPostsContainer = (props) => {
   
@@ -46,8 +47,8 @@ const mapDispatchToProps = (dispatch) => {
     }
   })
 }
-
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainerWithAuth = withAuthNavigate(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPostsContainerWithAuth);
 
 
 export default MyPostsContainer;

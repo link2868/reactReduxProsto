@@ -8,6 +8,11 @@ import { Navigate } from "react-router-dom";
 
 
 const LoginForm = (props) => {
+  
+  const messageError = props.messageErrorAuth.map((e, index) => {
+    return (<div key={index}>{e}</div>)
+  })
+ 
   return (
     <>
       <form onSubmit={props.handleSubmit}>
@@ -28,11 +33,12 @@ const LoginForm = (props) => {
           />
         </div>
         <div>
-          <Field component={"input"} name={"rememberMe"} type={"checkbox"} /> remember
-          me
+          <Field component={"input"} name={"rememberMe"} type={"checkbox"} />
+          <span className={style.rememberMe}>remember me</span>
         </div>
         <div>
           <button>Submit</button>
+          <div className={style.messageError}>{messageError}</div>
         </div>
       </form>
     </>
@@ -45,7 +51,6 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     const onSubmit = (formData) => { 
-      console.log(formData)
       props.postFormLogin(formData.email, formData.password, formData.rememberMe);
     }
   
@@ -58,14 +63,15 @@ const Login = (props) => {
   return (
     <div className={style.loginBlock}>
       <h2>Авторизація</h2>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} messageErrorAuth={ props.messageErrorAuth} />
     </div>
   );
 };
 
 const mapStateToProps = (state) => { 
   return ({
-    resultAuth: state.authUser.resultAuth
+    resultAuth: state.authUser.resultAuth,
+    messageErrorAuth: state.authUser.messageErrorAuth
   })
  
 }
