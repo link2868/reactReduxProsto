@@ -2,6 +2,7 @@ import React from "react";
 
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
+import MessageReduxForm from "./DialogsMessageForm/MessageForm";
 
 import style from "./Dialogs.module.css";
 
@@ -15,18 +16,16 @@ const Dialogs = (props) => {
     <Message key={ elem.id} message={elem.message} />
   ));
   
-  const newMessageText = state.newMessageText
+  // const newMessageText = state.newMessageText
   
-  // const refNewMessage = React.createRef();
-
-  const onAddNewMessage = () => {
-    props.addMessagesMessage();
+    const onAddNewMessage = (value) => {
+      props.addMessagesMessage(value.newMessage);
   };
 
-  const onMessageChange = (event) => {
-    const text = event.target.value;
-    props.updateMessageText(text);
-  };
+  // const onMessageChange = (event) => {
+  //   const text = event.target.value;
+  //   props.updateMessageText(text);
+  // };
 
   // if (!props.resultAuth) { 
   //   return <Navigate to={"/login"} />
@@ -37,19 +36,7 @@ const Dialogs = (props) => {
       <div className={style.dialogsItems}>{dialogsElement}</div>
       <div className={style.messages}>
         <div>{messagesElement}</div>
-        <div className={style.newMessage}>
-          <div>
-            <textarea
-              placeholder="Додайте свій текст"
-              onChange={onMessageChange}
-              value={newMessageText}
-              // ref={refNewMessage}
-            ></textarea>
-          </div>
-          <div>
-            <button onClick={onAddNewMessage}>Add post</button>
-          </div>
-        </div>
+       <MessageReduxForm onSubmit={onAddNewMessage}/>
       </div>
     </div>
   );
