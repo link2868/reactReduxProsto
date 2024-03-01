@@ -11,9 +11,6 @@
   margin: 4px;
 }
 
-.authContainer {
-}
-
 .authLogoContainer {
   display: flex;
 }
@@ -26,6 +23,7 @@
 .authButtonContainer button {
   border: 2px solid rgb(3, 124, 9);
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .authButtonContainer button span {

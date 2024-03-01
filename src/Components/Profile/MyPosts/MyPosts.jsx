@@ -1,8 +1,9 @@
 import React from "react";
 
 import Post from "./Post/Post";
-
+import MyPostsReduxForm from "./MyPostsForm/MyPostsForm";
 import style from "./MyPosts.module.css";
+
 
 
 const MyPosts = (props) => {
@@ -16,39 +17,26 @@ const MyPosts = (props) => {
     />
   ));
  
-  const newPostText = props.newPostText
-  // const refNewPost = React.createRef();
+  // const newPostText = props.newPostText
 
-  const onAddNewPostMessage = () => {
-    props.addProfilePost();
+  const onAddNewPostMessage = (value) => {
+    props.addProfilePost(value.newPost);
   };
 
-  const onPostChange = (event) => {
-    const text = event.target.value;
-    props.updateNewPostText(text);
-    // const action = {type: "UPDATE-NEW-POST-TEXT", newText: text }
-  };
+  // const onPostChange = (event) => {
+  //   const text = event.target.value;
+  //   props.updateNewPostText(text);
+  // };
   
   return (
     <div className={style.myPostBlock}>
       <h3>My posts</h3>
-      <div>
-        <div>
-          <textarea
-            placeholder="Додайте свій текст"
-            onChange={onPostChange}
-            value={newPostText}
-            // ref={refNewPost}
-          ></textarea>
-        </div>
-        <div>
-          <button onClick={onAddNewPostMessage}>Add post</button>
-        </div>
-      </div>
+      <MyPostsReduxForm onSubmit={onAddNewPostMessage} />
       <div className={style.post}>{postElement}</div>
     </div>
   );
 };
+
 export default MyPosts;
 
 
