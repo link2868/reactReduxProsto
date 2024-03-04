@@ -17,4 +17,5 @@
 
 .newMessage button {
   cursor: pointer;
+  margin-top: 5px;
 }
