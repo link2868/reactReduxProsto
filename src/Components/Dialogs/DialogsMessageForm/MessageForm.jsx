@@ -2,6 +2,10 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 import style from "../Dialogs.module.css";
+import { Textarea } from "../../Common/FormsControl/FormsControl";
+import { required, maxLength } from "../../../utils/validators/validators";
+
+const maxLength10 = maxLength(10);
 
 const MessageForm = (props) => {
   return (
@@ -10,7 +14,8 @@ const MessageForm = (props) => {
         <Field
             placeholder="Додайте свій текст"
             name="newMessage"
-            component={"textarea"}   
+          component={Textarea} 
+          validate={[required, maxLength10]}
         ></Field>
       </div>
       <div>
