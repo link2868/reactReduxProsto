@@ -22,7 +22,10 @@ const Login = (props) => {
   return (
     <div className={style.loginBlock}>
       <h2>Авторизація</h2>
-      <LoginReduxForm onSubmit={submitPostFormLogin} messageErrorAuth={ props.messageErrorAuth} />
+      <LoginReduxForm
+        onSubmit={submitPostFormLogin}
+        // messageErrorAuth={props.messageErrorAuth}
+      />
     </div>
   );
 };
@@ -30,7 +33,7 @@ const Login = (props) => {
 const mapStateToProps = (state) => { 
   return ({
     resultAuth: state.authUser.resultAuth,
-    messageErrorAuth: state.authUser.messageErrorAuth
+    // messageErrorAuth: state.authUser.messageErrorAuth
   })
  
 }

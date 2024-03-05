@@ -6,11 +6,6 @@ import { required } from "../../../utils/validators/validators";
 import style from "../Login.module.css";
 
 const LoginForm = (props) => {
-
- const messageError = props.messageErrorAuth.map((e, index) => {
-    return (<div key={index}>{e}</div>)
-  })
-   
   return (
     <>
       <form onSubmit={props.handleSubmit}>
@@ -37,8 +32,8 @@ const LoginForm = (props) => {
           <span className={style.rememberMe}>remember me</span>
         </div>
         <div>
-          <button>Submit</button>
-          <div className={style.messageError}>{messageError}</div>
+          <button >Submit</button>
+          <div className={style.messageError}>{props.error}</div>
         </div>
       </form>
     </>
@@ -49,4 +44,4 @@ const LoginReduxForm = reduxForm({
   form: "login",
 })(LoginForm);
 
-export default LoginReduxForm
+export default LoginReduxForm;

@@ -1,15 +1,16 @@
+import { stopSubmit } from "redux-form";
 import { profileApi, authApi } from "../api/api";
 
 const SET_AUTH_USER = "SET_AUTH_USER";
 const SET_PHOTO_USER = "SET_PHOTO_USER";
-const SET_ERROR_MESSAGE_AUTH = "SET_ERROR_MESSAGE_AUTH";
+// const SET_ERROR_MESSAGE_AUTH = "SET_ERROR_MESSAGE_AUTH";
 
 const initialState = {
   id: NaN,
   login: NaN,
   email: NaN,
   resultAuth: false,
-  messageErrorAuth: [],
+  // messageErrorAuth: [],
   photos: NaN,
 };
 
@@ -28,12 +29,12 @@ const authUserReducer = (state = initialState, action) => {
         photos: action.photos,
       };
     }
-    case SET_ERROR_MESSAGE_AUTH: {
-      return {
-        ...state,
-        messageErrorAuth: action.messages,
-      };
-    }
+    // case SET_ERROR_MESSAGE_AUTH: {
+    //   return {
+    //     ...state,
+    //     messageErrorAuth: action.messages,
+    //   };
+    // }
     default: {
       return state;
     }
@@ -48,9 +49,9 @@ export const setAuthUser = (id, login, email, resultAuth) => {
   return { type: SET_AUTH_USER, data: { id, login, email, resultAuth } };
 };
 
-export const setErrorMessageAuth = (messages) => {
-  return { type: SET_ERROR_MESSAGE_AUTH, messages };
-};
+// export const setErrorMessageAuth = (messages) => {
+//   return { type: SET_ERROR_MESSAGE_AUTH, messages };
+// };
 
 // export const setAuthUser = (data) => {
 //   return { type: SET_AUTH_USER, data: data };
@@ -58,7 +59,7 @@ export const setErrorMessageAuth = (messages) => {
 
 export const getAuthThunkCreator = () => {
   return (dispatch) => {
-    authApi
+    return authApi
       .getAuth()
       .then((data) => {
         if (data.resultCode === 0) {
@@ -82,7 +83,7 @@ export const postFormLogin = (email, password, rememberMe) => {
       if (data.resultCode === 0) {
         dispatch(getAuthThunkCreator());
       } else {
-        dispatch(setErrorMessageAuth(data.messages));
+        dispatch(stopSubmit("login", { _error: data.messages[0] }));
       }
     });
   };

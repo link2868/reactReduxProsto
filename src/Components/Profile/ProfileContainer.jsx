@@ -32,8 +32,8 @@ class ProfileContainer extends React.Component {
 
   refreshProfile() { 
   let userId = this.props.params.userId;
-    if (!userId) {
-      userId = 30760;
+    if (!userId && this.props.resultAuth) {
+      userId = this.props.id;
     }
     this.props.setUserProfileThunkCreator(userId);
     this.props.getUserStatus(userId);
@@ -69,6 +69,8 @@ const mapStateToProps = (state) => {
   return {
     profile: state.profilePostsPage.profile,
     status: state.profilePostsPage.status,
+    resultAuth: state.authUser.resultAuth,
+    id: state.authUser.id
   };
 };
 
