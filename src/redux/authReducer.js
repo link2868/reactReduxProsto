@@ -59,7 +59,7 @@ export const setAuthUser = (id, login, email, resultAuth) => {
 
 export const getAuthThunkCreator = () => {
   return (dispatch) => {
-    authApi
+    return authApi
       .getAuth()
       .then((data) => {
         if (data.resultCode === 0) {
