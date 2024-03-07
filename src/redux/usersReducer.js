@@ -149,7 +149,7 @@ export const setEnable = (enable, id) => {
 export const getUsersThunkCreator = (currentPage, pageSize) => {
   return (dispatch) => {
     dispatch(setPreloader(true));
-
+    dispatch(setPage(currentPage));
     usersApi.getUsers(currentPage, pageSize).then((data) => {
       dispatch(setPreloader(false));
       dispatch(setUsers(data.items));
