@@ -1,7 +1,8 @@
 import React from "react";
 
 import Preloader from "../../Common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus/ProfileStatus";
+// import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatusFunction from "./ProfileStatus/ProfileStatusFunction";
 
 import photoProfile from "../../../img/profile-photo.jpeg";
 import photoLarge from "../../../img/avatar/user.png";
@@ -24,7 +25,7 @@ const ProfileInfo = (props) => {
       <div>
         <img src={photoProfile} alt="" />
       </div>
-      <ProfileStatus
+      <ProfileStatusFunction
         status={props.status}
         updateUserStatus={props.updateUserStatus}
         isOwner={props.isOwner}
