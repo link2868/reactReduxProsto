@@ -8,8 +8,7 @@ import style from "./MyPosts.module.css";
 
 const MyPosts = (props) => {
   // const state = props.profilePostsPage;
-
-  const postElement = props.posts.map((elem) => (
+    const postElement = props.posts.map((elem) => (
     <Post
       key={ elem.id}
       message={elem.message}

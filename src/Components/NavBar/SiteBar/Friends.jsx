@@ -3,7 +3,7 @@ import style from "./Friends.module.css";
 
 
 export const Friends = (props) => {
-  
+ 
   return (
     <div className={style.friendsWrapper}>
       <div className={style.descFriends}>
@@ -15,6 +15,7 @@ export const Friends = (props) => {
 };
 
 const FriendsElements = (props) => {
+   
   return(
   props.sitebar.friends.map((elem) => (
     <Friends key={ elem.id} name={elem.name} avatar={elem.avatar} />

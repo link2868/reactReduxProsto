@@ -10,13 +10,13 @@
     "react-router-dom": "6.20.1",
     "react-scripts": "3.0.1",
     "redux": "4.2.1",
-    "redux-form": "^8.3.10",
+    "redux-form": "8.3.10",
     "redux-thunk": "2.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

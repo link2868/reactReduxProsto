@@ -7,6 +7,7 @@ import MessageReduxForm from "./DialogsMessageForm/MessageForm";
 import style from "./Dialogs.module.css";
 
 const Dialogs = (props) => {
+   
   const state = props.dialogsMessagesPage;
   const dialogsElement = state.dialogs.map((elem) => (
     <Dialog key={ elem.id} id={elem.id} name={elem.name} avatar={elem.avatar} />
